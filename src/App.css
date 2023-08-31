@@ -16,6 +16,12 @@ body {
   gap: 30px;
 }
 
+@media (max-width: 600px){
+  .wrapper {
+    flex-direction: column;
+  }
+}
+
 .column {
   flex: 0 1 auto;
   max-width: 50%;
