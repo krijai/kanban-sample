@@ -2,10 +2,10 @@ import './App.css';
 import { useSelector, useDispatch } from "react-redux"
 import { DragDropContext } from "react-beautiful-dnd"
 import Column from "./components/Column";
-import { useState } from 'react';
-import { updateTasks } from "./taskSlice"
+import { useState, useEffect } from 'react';
+import { updateTasks, getTitle } from "./taskSlice"
 function App() {
-  // const { taskList } = useSelector(state => state)
+  const { title } = useSelector(state => state)
   const dispatch = useDispatch()
 
 
@@ -22,6 +22,10 @@ function App() {
 
   const [taskList, setTasks] = useState(initialState);
   console.log("taskList-----", taskList)
+
+  useEffect(() => {
+    dispatch(getTitle())
+  },[])
 
   function onDragEnd(val) {
     const { draggableId, source, destination } = val;
@@ -69,9 +73,10 @@ function App() {
     setTasks(newTaskList);
     dispatch(updateTasks(newTaskList))
   }
+  console.log("title----------", title)
   return (
     <DragDropContext onDragEnd={onDragEnd} className="container">
-      <h1 className='heading'>Simple Kanban Board</h1>
+      <h1 className='heading'>{title}</h1>
       <div className="wrapper">
         <Column
           className="column"

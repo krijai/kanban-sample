@@ -1,14 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    taskList: [{
-        groupName: "Active List",
-        tasks: [{ id: "1", title: "Task-1" }, { id: "2", title: "Task-2" }]
-      },
-      {
-        groupName: "Completed List",
-        tasks: [{ id: "3", title: "Task-3" }, { id: "4", title: "Task-4" }]
-      }],
+    title: ""
 }
 
 const taskSlice = createSlice({
@@ -16,10 +9,14 @@ const taskSlice = createSlice({
     initialState,
     reducers: {
         updateTasks: (state, action) => {
+            console.log("NewTasklist--------", action.payload)
+        },
+        getTitle: (state, action) => {
             console.log("action.payload--------", action.payload)
+            return {title: "Simple Kanban Board"}
         },
     },
 })
 
-export const { updateTasks } = taskSlice.actions
+export const { updateTasks, getTitle } = taskSlice.actions
 export default taskSlice.reducer
